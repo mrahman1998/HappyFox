@@ -14,27 +14,19 @@ import org.openqa.selenium.interactions.Actions;
 public class Testcase101 {
 
     public static void main(String[] args) throws InterruptedException, AWTException {
-
-        //Comment: This should be kept in the configuration file
         System.setProperty("webdriver.gecko.driver", "C:\\Users\\Johny\\Downloads\\geckodriver-v0.33.0-win64\\geckodriver.exe");
         WebDriver driver = new FirefoxDriver();
         driver.get("https://interview.supporthive.com/staff/");
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-
-        //Comment: Credentials should be stored in variables
         driver.findElement(By.id("id_username")).sendKeys("Agent");
         driver.findElement(By.id("id_password")).sendKeys("Agent@123");
         driver.findElement(By.id("btn-submit")).click();
         WebElement tickets = driver.findElement(By.id("ember29"));
         Actions action = new Actions(driver);
         action.moveToElement(tickets).build().perform();
-
-        //Comment: Store locators separately in variables
         WebElement statuses = driver.findElement(By.linkText("Statuses"));
         statuses.click();
-
-        //Comment: Absulute xpath's are not recommended. Consider using relative xpath or other locators
         driver.findElement(By.xpath("/html/body/div[3]/div/section/section/div/header/button")).click();
         driver.findElement(By.tagName("input")).sendKeys("Issue Created");
         WebElement statusColourSelect = driver.findElement(By.xpath("//div[@class='sp-replacer sp-light']"));
@@ -51,57 +43,42 @@ public class Testcase101 {
         WebElement secondElement = driver.findElement(By.xpath("//a[@id='second-link']"));
         secondElement.click();
 
-
         driver.findElement(By.tagName("textarea")).sendKeys("Status when a new ticket is created in HappyFox");
         WebElement addCreate = driver.findElement(By.xpath("//button[@class ='hf-entity-footer_primary hf-primary-action ember-view']"));
         addCreate.click();
 
-        //Use explicit waits for synchronization issues
         Thread.sleep(3000);
 
-        //Comment: Give meaningful names to web element
         WebElement moveTo = driver.findElement(By.xpath("//td[@class ='lt-cell align-center hf-mod-no-padding ember-view']"));
         action.moveToElement(moveTo).build().perform();
         moveTo.click();
 
-        //Comment: Use explicit waits for synchronization issues
         Thread.sleep(9000);
 
         WebElement issue = driver.findElement(By.xpath("//div[contains(text(),'Issue Created')]"));
         action.moveToElement(issue).build().perform();
 
-        //Comment: Give meaningful names to web element
         WebElement make = driver.findElement(By.linkText("Make Default"));
         make.click();
         driver.findElement(By.linkText("Priorities")).click();
         driver.findElement(By.xpath("//header/button[1]")).click();
         driver.findElement(By.tagName("input")).sendKeys("Assistance required");
         driver.findElement(By.tagName("textarea")).sendKeys("Priority of the newly created tickets");
-        //Comment: Give meaningful names to web elements
         WebElement button = driver.findElement(By.cssSelector("button[data-test-id='add-priority']"));
         button.click();
 
-        //Comment: Use explicit waits for synchronization issues
         Thread.sleep(9000);
 
-        //Comment: Give meaningful names to web element
         WebElement tickets2 = driver.findElement(By.id("ember29"));
         action.moveToElement(tickets2).build().perform();
-        
-        //Comment: Give meaningful names to web element
         WebElement priorities2 = driver.findElement(By.linkText("Priorities"));
         priorities2.click();
-
-        //Implicit wait should be only declaed once.
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-
-        //Use static attributes for xpath example: id, reduce the size of xpath as long xpath tends to not work with minor changes in UI.
         driver.findElement(By.xpath("/html[1]/body[1]/div[3]/div[1]/section[1]/section[1]/div[1]/div[1]/section[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/table[1]/tbody[1]/tr[9]/td[2]")).click();
         driver.findElement(By.linkText("Delete")).click();
         WebElement delete = driver.findElement(By.cssSelector("button[data-test-id='delete-dependants-primary-action']"));
         delete.click();
 
-        //Use explicit waits for synchronization issues
         Thread.sleep(9000);
         driver.findElement(By.xpath("/html[1]/body[1]/div[3]/div[1]/header[1]/div[2]/nav[1]/div[7]/div[1]/div[1]")).click();
         driver.findElement(By.linkText("Logout")).click();
@@ -192,4 +169,3 @@ public class Testcase101 {
         }
     }
 }
-
